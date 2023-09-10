@@ -89,7 +89,7 @@ bool read_wav(const std::string & fname, std::vector<float>& pcmf32, std::vector
 
 void test_whisper_ggml_infer() {
     std::string model_file = "/Users/yang/CLionProjects/test_ggml/whisper/ggml-whisper-tiny.bin";
-    std::string wav_file = "/Users/yang/CLionProjects/test_ggml/data/audio/test_english.wav";
+    std::string wav_file = "/Users/yang/CLionProjects/test_ggml/data/audio/60351dbf545f99407d4d71ef_2.wav";
 
     std::vector<float> pcmf32;               // mono-channel F32 PCM
     std::vector<std::vector<float>> pcmf32s; // stereo-channel F32 PCM
@@ -130,14 +130,12 @@ void test_whisper_ggml_infer() {
     params.print_timestamps = false;
     params.print_special = false;
     params.translate = false;
-    params.language = "en";
+    params.language = "zh";
     params.offset_ms = 0;
     params.no_context = true;
     params.single_segment = false;
 
-    std::string device = "CPU";
     struct whisper_context * ctx = whisper_init_from_file(model_file.c_str());
-    whisper_ctx_init_openvino_encoder(ctx, nullptr, device.c_str(), nullptr);
     if (whisper_full(ctx, params, pcmf32.data(), pcmf32.size()) != 0) {
         fprintf(stderr, "failed to process audio\n");
         return ;
