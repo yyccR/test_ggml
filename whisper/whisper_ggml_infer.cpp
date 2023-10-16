@@ -94,6 +94,9 @@ void test_whisper_ggml_infer() {
     std::vector<float> pcmf32;               // mono-channel F32 PCM
     std::vector<std::vector<float>> pcmf32s; // stereo-channel F32 PCM
     read_wav(wav_file, pcmf32, pcmf32s, false);
+
+    const char *sysinfo = whisper_print_system_info();
+    std::cout << "whisper_print_system_info(): " << sysinfo << std::endl;
     // 加载音频
 //    std::vector<float> pcmf32;
 //    drwav wav;
